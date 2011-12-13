@@ -1,3 +1,27 @@
+This is a fork of the original Mini-Scheme implementation, miniscm,
+by Atsushi Moriwaki.  The original README follows after the first
+line of equals signs in this file.
+
+My understanding is that Akira KIDA is no longer actively maintaining
+this project, and that the Mini-Scheme language and miniscm reference
+implementation effectively have no maintainer.  It is not my objective
+to become the new maintainer of the language or implementation; rather,
+it is simply to provide a modernized and generally backwards-compatible
+source base for miniscm.  Some improvements I might consider:
+
+- modernize Makefile
+- add -q command line option to suppress extraneous output
+- add -i command line option to specify the location of init.scm
+- allow source file(s) to be specified on command line
+- make compilable under AmigaOS 1.3 with DICE C
+- remove compiler warnings
+
+If you are interested in a more developed and actively maintained
+Scheme implementation which started as a fork of miniscm, check out
+the BSD-licensed TinyScheme: http://tinyscheme.sourceforge.net/
+
+-Chris
+
  =====================================================================
 
       ---------- Mini-Scheme Interpreter Version 0.85 ----------
