@@ -13,6 +13,8 @@
  */
 /*--
  *
+ *  This version has been modified by Chris Pressey.
+ *
  *  This version has been modified by R.C. Secrist.
  *
  *  Mini-Scheme is now maintained by Akira KIDA.
@@ -2447,5 +2449,6 @@ main()
 	op = setjmp(error_jmp);
 #endif
 	Eval_Cycle(op);
+	exit(0);
 }
 
