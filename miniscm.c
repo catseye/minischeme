@@ -143,7 +143,8 @@
 #endif
 
 #ifdef BSD
-#include <strings.h>
+#include <string.h>
+#include <stdlib.h>
 #include <signal.h>
 #define prompt "> "
 #define InitFile "init.scm"
@@ -549,14 +550,14 @@ char   *name;
 		return (F);
 	else if (*name == 'o') {/* #o (octal) */
 		sprintf(tmp, "0%s", &name[1]);
-		sscanf(tmp, "%lo", &x);
+		sscanf(tmp, "%lo", (unsigned long int *)&x);
 		return (mk_number(x));
 	} else if (*name == 'd') {	/* #d (decimal) */
 		sscanf(&name[1], "%ld", &x);
 		return (mk_number(x));
 	} else if (*name == 'x') {	/* #x (hex) */
 		sprintf(tmp, "0x%s", &name[1]);
-		sscanf(tmp, "%lx", &x);
+		sscanf(tmp, "%lx", (unsigned long int *)&x);
 		return (mk_number(x));
 	} else
 		return (NIL);
