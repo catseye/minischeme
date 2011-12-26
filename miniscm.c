@@ -339,6 +339,7 @@ jmp_buf error_jmp;
 
 #endif
 char    gc_verbose;		/* if gc_verbose is not zero, print gc status */
+int     quiet = 0;		/* if not zero, print banner, prompt, results */
 
 /* allocate new cell segment */
 alloc_cellseg(n)
@@ -690,12 +691,14 @@ int     inchar()
 		if (feof(infp)) {
 			fclose(infp);
 			infp = stdin;
-			printf(prompt);
+			if (!quiet)
+				printf(prompt);
 		}
 		strcpy(linebuff, "\n");
 		if (fgets(currentline = linebuff, LINESIZE, infp) == NULL)
 			if (infp == stdin) {
-				fprintf(stderr, "Good-bye\n");
+				if (!quiet)
+					fprintf(stderr, "Good-bye\n");
 				exit(0);
 			}
 		endline = linebuff + strlen(linebuff);
@@ -1148,16 +1151,18 @@ register short op;
 			infp = stdin;
 			Error_1("Unable to open", car(args));
 		}
-		fprintf(outfp, "loading %s", strvalue(car(args)));
+		if (!quiet)
+			fprintf(outfp, "loading %s", strvalue(car(args)));
 		s_goto(OP_T0LVL);
 
 	case OP_T0LVL:	/* top level */
-		fprintf(outfp, "\n");
+		if (!quiet)
+			fprintf(outfp, "\n");
 		dump = NIL;
 		envir = global_env;
 		s_save(OP_VALUEPRINT, NIL, NIL);
 		s_save(OP_T1LVL, NIL, NIL);
-		if (infp == stdin)
+		if (infp == stdin && !quiet)
 			printf(prompt);
 		s_goto(OP_READ);
 
@@ -1172,8 +1177,12 @@ register short op;
 	case OP_VALUEPRINT:	/* print evalution result */
 		print_flag = 1;
 		args = value;
-		s_save(OP_T0LVL, NIL, NIL);
-		s_goto(OP_P0LIST);
+		if (quiet) {
+			s_goto(OP_T0LVL);
+		} else {
+			s_save(OP_T0LVL, NIL, NIL);
+			s_goto(OP_P0LIST);
+		}
 
 	case OP_EVAL:		/* main part of evalution */
 		if (issymbol(code)) {	/* symbol */
@@ -2439,11 +2448,27 @@ char   *fmt, *a, *b, *c;
 
 /* ========== Main ========== */
 
+#ifdef CMDLINE
+main(argc, argv)
+int argc;
+char **argv;
+#else
 main()
+#endif
 {
+	short   i;
 	short   op = (short) OP_LOAD;
 
-	printf(banner);
+#ifdef CMDLINE
+	for (i = 1; i < argc; i++) {
+		if (strcmp(argv[i], "-q") == 0) {
+			quiet = 1;
+		}
+	}
+#endif
+
+	if (!quiet)
+		printf(banner);
 	init_scheme();
 	args = cons(mk_string(InitFile), NIL);
 #ifdef USE_SETJMP

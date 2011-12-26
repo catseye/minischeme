@@ -14,11 +14,13 @@ Some improvements that have been made:
 - modernized Makefile (defaults to 4.3 BSD, which works for Linux)
 - removed compiler warnings (under 4.3 BSD)
 - made compilable under AmigaOS 1.3 with DICE C
+- added -q command line option to suppress all non-explicit output
+  (this includes the prompt; if you want output, use (display))
 
 Some further improvements I might consider:
 
-- add -q command line option to suppress extraneous output
 - add -i command line option to specify the location of init.scm
+- add -l command line option to disable abbreviated quote output
 - allow source file(s) to be specified on command line
 
 If you are interested in a more developed and actively maintained

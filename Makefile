@@ -11,7 +11,7 @@
 #    CFLAGS = -O -DSYSV
 
 CC ?= gcc
-CFLAGS ?= -O -ansi -pedantic -DBSD
+CFLAGS ?= -O -ansi -pedantic -DBSD -DCMDLINE
 
 all :	miniscm
 
