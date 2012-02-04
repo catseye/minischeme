@@ -14,6 +14,7 @@
 /*--
  *
  *  This version has been modified by Chris Pressey.
+ *	current version is 0.85p1 (as yet unreleased)
  *
  *  This version has been modified by R.C. Secrist.
  *
@@ -104,7 +105,7 @@
 
 
 
-#define banner "Hello, This is Mini-Scheme Interpreter Version 0.85k4-a.\n"
+#define banner "Hello, This is Mini-Scheme Interpreter Version 0.85p1.\n"
 
 
 #include <stdio.h>
@@ -340,6 +341,7 @@ jmp_buf error_jmp;
 #endif
 char    gc_verbose;		/* if gc_verbose is not zero, print gc status */
 int     quiet = 0;		/* if not zero, print banner, prompt, results */
+int     all_errors_fatal = 0;   /* if not zero, every error is a FatalError */
 
 /* allocate new cell segment */
 alloc_cellseg(n)
@@ -1795,6 +1797,9 @@ register short op;
 		}
 		tmpfp = outfp;
 		outfp = stderr;
+                if (all_errors_fatal) {
+                        FatalError(strvalue(car(args)));
+                }
 		fprintf(outfp, "Error: ");
 		fprintf(outfp, "%s", strvalue(car(args)));
 		args = cdr(args);
@@ -2461,7 +2466,9 @@ main()
 
 #ifdef CMDLINE
 	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-q") == 0) {
+		if (strcmp(argv[i], "-e") == 0) {
+			all_errors_fatal = 1;
+		} else if (strcmp(argv[i], "-q") == 0) {
 			quiet = 1;
 		}
 	}

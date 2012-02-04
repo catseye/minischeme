@@ -9,6 +9,10 @@ to become the new maintainer of the language or implementation; rather,
 it is simply to provide a modernized and generally backwards-compatible
 source base for miniscm.
 
+The current version of this fork of Mini-Scheme is:
+
+		Version 0.85p1  (as yet unreleased)
+
 Some improvements that have been made:
 
 - modernized Makefile (defaults to 4.3 BSD, which works for Linux)
@@ -16,6 +20,8 @@ Some improvements that have been made:
 - made compilable under AmigaOS 1.3 with DICE C
 - added -q command line option to suppress all non-explicit output
   (this includes the prompt; if you want output, use (display))
+- added -e command line option to cause all errors to be treated
+  as fatal errors (exit interpreter immediately with error code 1)
 
 Some further improvements I might consider:
 
