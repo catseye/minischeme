@@ -148,3 +148,9 @@
                         `,vars)))))
       do-macro)))
 
+;;;;; following part is written by c.p
+
+(define (list? x)
+  (or (eq? x '())
+      (and (pair? x)
+           (list? (cdr x)))))

@@ -33,6 +33,10 @@ If you are interested in a more developed and actively maintained
 Scheme implementation which started as a fork of miniscm, check out
 the BSD-licensed TinyScheme: http://tinyscheme.sourceforge.net/
 
+There is also another fork of miniscm on Sourceforge with the name
+"minischeme", although at 2 megabytes, I'm not sure it deserves the
+appelation "mini" any more: http://sourceforge.net/projects/minischeme/
+
 -Chris
 
  =====================================================================
