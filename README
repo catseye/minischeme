@@ -1,6 +1,6 @@
-This is a fork of the original Mini-Scheme implementation, miniscm,
-by Atsushi Moriwaki.  The original README follows after the first
-line of equals signs in this file.
+This is Cat's Eye Technologies' fork of the original Mini-Scheme
+implementation, miniscm, by Atsushi Moriwaki.  The original README can
+be found below, following the first line of equals signs in this file.
 
 My understanding is that Akira KIDA is no longer actively maintaining
 this project, and that the Mini-Scheme language and miniscm reference
@@ -9,9 +9,9 @@ to become the new maintainer of the language or implementation; rather,
 it is simply to provide a modernized and generally backwards-compatible
 source base for miniscm.
 
-The current version of this fork of Mini-Scheme is:
-
-		Version 0.85p1  (as yet unreleased)
+This code was forked from version 0.85k4.  The current version of this
+fork is 0.85ce1.  (I elected to use "ce" for "Cat's Eye" because "p" for
+"Pressey" is too easily confused with "patchlevel".)
 
 Some improvements that have been made:
 
